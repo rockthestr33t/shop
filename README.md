@@ -74,6 +74,54 @@ sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo apt-get update
 sudo apt-get install mysql-server # and kep the old config
 
+# install nginx
+sudo service apache2 stop
+sudo apt-get install nginx
+
+# add group / user
+sudo groupadd annularis
+sudo useradd -g annularis annularis
+
+# php7.0-fpm conf
+sudo cp /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/annularis.conf
+sudo vim /etc/php/7.0/fpm/pool.d/annularis.conf
+echo " ## edit as following "
+echo " # [annularis] "
+echo " # user = annularis "
+echo " # group = annularis "
+echo " # listen = /var/run/php/php7.0-fpm-annularis.sock "
+echo " # listen.owner = www-data "
+echo " # listen.group = www-data "
+echo " # php_admin_value[disable_functions] = exec,passthru,shell_exec,system "
+echo " # php_admin_flag[allow_url_fopen] = off "
+sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
+## edit as following
+# opcache.enable=0
+
+# restart fpm
+sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
+
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

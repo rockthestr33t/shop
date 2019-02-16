@@ -101,8 +101,10 @@ sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
 # restart fpm
 sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
 
-# 
+# install tor
+sudo apt-get install tor  # easy option
 
+# 
 
 
 

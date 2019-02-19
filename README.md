@@ -27,9 +27,9 @@ sudo service apache2 restart
 
 # install bitcoind
 cd /tmp
-sudo wget https://bitcoin.org/bin/bitcoin-core-0.16.3/bitcoin-0.16.3-x86_64-linux-gnu.tar.gz
-sudo aunpack bitcoin-0.16.3-x86_64-linux-gnu.tar.gz 
-cd bitcoin-0.16.3
+sudo wget https://bitcoin.org/bin/bitcoin-core-0.15.2/bitcoin-0.15.2-x86_64-linux-gnu.tar.gz
+sudo aunpack bitcoin-0.15.2-x86_64-linux-gnu.tar.gz 
+cd bitcoin-0.15.2
 sudo cp bin/* /usr/local/bin/
 sudo bitcoind -daemon -testnet -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
 

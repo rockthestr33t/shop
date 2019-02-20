@@ -102,7 +102,15 @@ sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
 sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
 
 # install tor
-sudo apt-get install tor  # easy option
+sudo vim /etc/apt/sources.list
+
+deb http://deb.torproject.org/torproject.org xenial main
+deb-src http://deb.torproject.org/torproject.org xenial main
+
+gpg --keyserver keys.gnupg.net --recv 886DDD89
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install tor deb.torproject.org-keyring
 
 # 
 

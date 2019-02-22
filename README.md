@@ -112,7 +112,8 @@ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install tor deb.torproject.org-keyring
 
-# 
+# after install 
+sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 
 
 
 

@@ -8,7 +8,7 @@ sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
 
 sudo apt-get install -y nginx mysql-server mysql-client libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-mbstring php-gnupg php7.1-mysql php7.1-gmp php7.1-curl php7.1-bcmath php7.1-gd php7.1-fpm git curl git mcrypt curl unzip atool subversion  
-
+phpenmod mysqli mcrypt curl gmp gd
 
 
 sudo apt-get install -y apache2 mysql-server mysql-client libapache2-mod-php7.0 php7.0 php7.0-mcrypt php7.0-mbstring php-gnupg php7.0-mysql php7.0-gmp php7.0-curl php7.0-bcmath php7.0-gd php7.0-fpm git curl git mcrypt curl unzip atool subversion  

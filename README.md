@@ -103,15 +103,17 @@ sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
 
 # install tor
 https://www.torproject.org/docs/debian.html.en
+
+sudo apt install apt-transport-https
 sudo vim /etc/apt/sources.list.d/
 deb https://deb.torproject.org/torproject.org xenial main
 deb-src https://deb.torproject.org/torproject.org xenial main
 
-curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
-gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+sudo curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 
-apt update
-apt install tor deb.torproject.org-keyring
+sudo apt update
+sudo apt install tor deb.torproject.org-keyring
 
 # after install 
 sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 

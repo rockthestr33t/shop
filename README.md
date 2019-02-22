@@ -2,6 +2,15 @@
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y 
 
 # install dependencies ubuntu16.04
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4F4EA0AAE5267A6C
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+
+sudo apt-get install -y nginx mysql-server mysql-client libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-mbstring php-gnupg php7.1-mysql php7.1-gmp php7.1-curl php7.1-bcmath php7.1-gd php7.1-fpm git curl git mcrypt curl unzip atool subversion  
+
+
+
 sudo apt-get install -y apache2 mysql-server mysql-client libapache2-mod-php7.0 php7.0 php7.0-mcrypt php7.0-mbstring php-gnupg php7.0-mysql php7.0-gmp php7.0-curl php7.0-bcmath php7.0-gd php7.0-fpm git curl git mcrypt curl unzip atool subversion  
 
 # install dependencies ubuntu14.04
@@ -114,6 +123,10 @@ sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 
 sudo apt update
 sudo apt install tor deb.torproject.org-keyring
+
+# tor config
+sudo vim /etc/tor/torrc
+
 
 # after install 
 sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 

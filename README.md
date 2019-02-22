@@ -65,7 +65,7 @@ crontab -e # and insert
 php /var/www/shop/index.php db
 
 # set critical files to read only 
-#sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 
+sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 
 
 # installed mysql8
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
@@ -103,6 +103,15 @@ sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
 
 # install tor
 https://www.torproject.org/docs/debian.html.en
+sudo vim /etc/apt/sources.list.d/
+deb https://deb.torproject.org/torproject.org xenial main
+deb-src https://deb.torproject.org/torproject.org xenial main
+
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
+
+apt update
+apt install tor deb.torproject.org-keyring
 
 # after install 
 sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 

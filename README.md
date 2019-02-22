@@ -92,7 +92,7 @@ echo " # group = annularis "
 echo " # listen = /var/run/php/php7.0-fpm-annularis.sock "
 echo " # listen.owner = www-data "
 echo " # listen.group = www-data "
-echo " # php_admin_value[disable_functions] = exec,passthru,shell_exec,system "
+echo " # php_admin_ value[disable_functions] = exec,passthru,shell_exec,system "
 echo " # php_admin_flag[allow_url_fopen] = off "
 sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
 ## edit as following
@@ -102,15 +102,7 @@ sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
 sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
 
 # install tor
-sudo vim /etc/apt/sources.list
-
-deb http://deb.torproject.org/torproject.org xenial main
-deb-src http://deb.torproject.org/torproject.org xenial main
-
-gpg --keyserver keys.gnupg.net --recv 886DDD89
-gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install tor deb.torproject.org-keyring
+https://www.torproject.org/docs/debian.html.en
 
 # after install 
 sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 

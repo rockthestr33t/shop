@@ -112,13 +112,13 @@ sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
 # opcache.enable=0
 
 # restart fpm
-sudo service php7.0-fpm restart # if problems " sudo apt-get purge php.* "
+sudo service php7.0-fpm restart 
 
 # install tor
 https://www.torproject.org/docs/debian.html.en
 
 sudo apt install apt-transport-https
-sudo vim /etc/apt/sources.list.d/
+sudo vim /etc/apt/sources
 deb https://deb.torproject.org/torproject.org xenial main
 deb-src https://deb.torproject.org/torproject.org xenial main
 
@@ -130,7 +130,7 @@ sudo apt install tor deb.torproject.org-keyring
 
 # tor config
 sudo vim /etc/tor/torrc
-
+sudo service tor restart
 
 # after install 
 sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 

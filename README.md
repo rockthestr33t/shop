@@ -12,6 +12,7 @@ phpenmod mysqli mcrypt curl gmp gd
 
 
 sudo apt-get install -y apache2 mysql-server mysql-client libapache2-mod-php7.0 php7.0 php7.0-mcrypt php7.0-mbstring php-gnupg php7.0-mysql php7.0-gmp php7.0-curl php7.0-bcmath php7.0-gd php7.0-fpm git curl git mcrypt curl unzip atool subversion  
+sudo phpenmod mysqli mcrypt curl gmp gd
 
 # install dependencies ubuntu14.04
 sudo apt-get install apache2 mysql-server mysql-client php5 libapache2-mod-php5 php5-mcrypt php5-gnupg php5-mysql php5-gmp php5-curl php5-gd git
@@ -24,6 +25,9 @@ sudo git clone https://github.com/rockthestr33t/shop.git
 
 # change owneship
 sudo chown www-data:www-data -Rv shop
+sudo chown www-data:www-data -R . shop # tested worked
+sudo chmod 755 -R . shop
+
 
 # change dictory
 cd shop

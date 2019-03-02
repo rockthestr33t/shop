@@ -1,0 +1,105 @@
+Euro Marketplace features
+
+Multi Vendor Euro Market provides a basic set of marketplace features that allows vendors to sell their products and buyers to buy them:
+
+Registration, Profile & Login Euro market registration page
+
+    Users sign up with a username, password and profile PIN (2FA to protect sensitive actions inside the market place)
+    Users log in by entering username, password and solving a captcha
+    Users can edit their passwords/profile PIN, define a PGP public key and a BIP32 key in their profile
+
+Become vendor
+
+    Every user without current orders is allowed to become a vendor. For now, the setup fee for vendors is 400.00$. If the user has defined a PGP key (required for vendors), he can upgrade his profile by clicking 'become a vendor'. Before he can create listings, he needs to set his BIP32 bitcoin key (see BIP32 hierarchical keys).
+
+Products & shipping options Multi Vendor Euro market product view
+
+    Before creating products, a vendor needs to create at least one shipping option (with name & price)
+    He creates products (with name, description, price, image, shipping options, ...) that are hidden (only accessible with URL) or displayed immediately in the public listing.
+
+Order lifecycle Multi Vendor Euro market order view
+
+    Buyers see all public listings on the frontpage and can sort & filter the products (searchable by 'tags' that can be defined on products)
+    Buyers can see the rating & feedbacks of vendors on the vendor pages
+    Before a buyer can order products, he needs to define a BIP32 public key in his profile (see BIP32 hierarchical keys)
+    If a buyer decides to order a product, an unconfirmed order (product, shipping option & amount) is created
+    Buyer confirms this order by entering the shipping info (which is encrypted with the vendor's PGP public key on the server side), a bitcoin refund address (only used for disputes) and his profile pin
+    The vendor receives the confirmed order and decides if he's able to fulfill it. No up-front ("finalize early") payments are possible at the moment, we always use full escrow.
+    The vendor either accepts it (entering a payout address) or declines it (with an additional message), both with entering the profile PIN.
+    If accepted, a bitcoin multisig transaction for buyer, vendor and admin (2 of 3) is created for the order
+    The buyer now pays the required funds on the multisig address. Euro market automatically picks up the payments and sets the order to 'paid'
+    The vendor now ships the goods and marks the order as 'shipped' by (off-line) signing the multisig transaction with its private key. He adds the partially signed transaction to the order. The shipping info is wiped at this moment.
+    The buyer receives the goods and marks the order as 'received' by (offline) signing the (partially signed) transaction. It is now a valid signed transaction which the buyer broadcasts to the bitcoin network. Euro market automatically picks up the transaction and releases the funds to the vendor.
+    As soon as the order is paid, one of the parties can raise a dispute that an admin has to resolve (see Admin interface)
+
+Rating & Wiping
+
+    After an order is completed, the buyer has the possibility to rate the vendor (1-5) and leave an optional comment (buyer rating is not implemented)
+    14 days after completion of the order, the order can be deleted.
+
+Bitcoin integration
+
+Multi Vendor Euro Market integrates bitcoin payments using multisig transactions so that bitcoin funds never have to be stored on the market place (no live wallet needed). It further facilitates & secures shopping by integrating BIP32 hierarchical keys.
+
+Multisig transactions
+As soon as an order is accepted by both parties, Euro market creates a 2-of-3 multisig address with the public keys of buyer, vendor & admin.
+Funds paid on this multisig address can only be released if 2 of the 3 parties (vendor, buyer or admin) sign a transaction using these funds.
+As soon as an order is accepted by both parties, Euro market creates a 2-of-3 multisig address with the public keys of buyer, vendor & admin.
+Funds paid on this multisig address can only be released if 2 of the 3 parties (vendor, buyer or admin) sign a transaction using these funds.
+The buyer pays the order costs on this multisig address: Bitcoins are thus never stored on the market. Vendor fraud is also harder, since he needs at least one other party to release the funds.
+Vendor & buyer can sign & broadcast this transaction during the order lifecyle and finish the order.
+If a party raises a dispute, the admin can craft and sign a new transaction. Only consent of another party is then needed to release the funds.
+Since Euro market only uses bitcoin protocols, vendor & buyer could even release the funds in case the market goes down.
+Signing is done offline - either by using the bitcoin-qt-Debug-Console or a web wallet like coinbin. 
+Euro market does not require the user to enter their private keys for obvious security reasons.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    As soon as an order is accepted by both parties, Euro market creates a 2-of-3 multisig address with the public keys of buyer, vendor & admin.
+    Funds paid on this multisig address can only be released if 2 of the 3 parties (vendor, buyer or admin) sign a transaction using these funds.
+    The buyer pays the order costs on this multisig address: Bitcoins are thus never stored on the market. Vendor fraud is also harder, since he needs at least one other party to release the funds.
+    If enough bitcoins are spent to this address - Euro market is notified by bitcoind on every transaction in the blockchain - it creates a transaction that use the multisig funds and pays the vendor (and possibly the market admin in the future, but this is not implemented at the moment)
+    Vendor & buyer can sign & broadcast this transaction during the order lifecyle and finish the order.
+    If a party raises a dispute, the admin can craft and sign a new transaction. Only consent of another party is then needed to release the funds.
+    Since Euro market only uses bitcoin protocols, vendor & buyer could even release the funds in case the market goes down.
+    Signing is done offline - either by using the bitcoin-qt-Debug-Console or a web wallet like coinbin. Euro market does not require the user to enter their private keys for obvious security reasons.
+
+BIP32 hierarchical keys
+
+Buyers and vendors define a BIP32 extended public key in their profile. When an order is accepted and Euro market creates a multisig address, it needs public keys from vendors, buyers and admin. It uses hierarchical key derivation to generate new child keys from the extended public keys of vendor/buyer/admin.
+
+This way, public keys are never reused (which is crucible for anonymity) and the parties do not have to manually enter keys on each order.
+
+For now, signing of the transactions requires deriving the private key of the used public key first. This must be done manually by the user, since client support of the wallets is not there yet. Euro market helps with pointing out which key in the tree was used. But until the most used Wallets like Electrum starts supporting BIP32, a web wallet like bip32.org has to be used for this step.
+
+
+
+
+
+
+
+
+
+
+
+FOR ADMIN's
+Admin interface
+
+    Admin users log in using a challenge-response authentication by signing a random message with a bitcoin private key, whose public key is stored in the store database (using set-admin)
+    Admins see the open disputes (that either buyer or vendor has raised during the order lifecycle) and solve them by...
+    ... discussing the dispute by leaving messages (same as buyer/vendor can)
+    ... crafting a new transaction that pays a certain amount to buyer & vendor
+
+
+
+

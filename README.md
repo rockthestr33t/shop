@@ -1,13 +1,22 @@
 # Install annularis on ubuntu16.04 LTS
 
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y 
+sudo apt-get update &&
+
+sudo apt-get upgrade -y &&
+
+sudo apt-get dist-upgrade -y &&
+
+sudo apt-get autoremove -y 
 
 
 # install dependencies ubuntu16.04
 
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4F4EA0AAE5267A6C
+
 sudo apt-get install software-properties-common
+
 sudo add-apt-repository ppa:ondrej/php
+
 sudo apt-get update
 
 

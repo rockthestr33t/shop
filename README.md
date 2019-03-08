@@ -33,6 +33,7 @@ sudo phpenmod mysqli mcrypt curl gmp gd
 
 # installed mysql8
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
+ gpg --recv-keys 5072E1F5 
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 
 sudo apt-get update
@@ -58,7 +59,8 @@ sudo chown www-data:www-data -Rv shop
 
 
 # change dictory
-cd shop/install/config/
+cd shop/install/assets
+cd /cd shop/install/config/
 
 
 # enable rewrite

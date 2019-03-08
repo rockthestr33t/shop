@@ -22,7 +22,6 @@ sudo apt-get update
 # install mysql8 for ubuntu 18.04
 cd /tmp
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb
-sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
 sudo apt-get update
 

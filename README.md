@@ -19,6 +19,13 @@ sudo add-apt-repository ppa:ondrej/php
 
 sudo apt-get update
 
+# install mysql8 for ubuntu 18.04
+cd /tmp
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.12-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
+sudo apt-get update
+
 
 # php 7.1
 sudo apt-get install -y nginx mysql-server mysql-client libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-mbstring php-gnupg php7.1-mysql php7.1-gmp php7.1-curl php7.1-bcmath php7.1-gd php7.1-fpm git curl git mcrypt curl unzip atool subversion  

@@ -33,7 +33,7 @@ sudo phpenmod mysqli mcrypt curl gmp gd
 
 # installed mysql8
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
- gpg --recv-keys 5072E1F5 
+ apt-key adv --keyserver pgp.mit.edu --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 
 sudo apt-get update

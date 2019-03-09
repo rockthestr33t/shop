@@ -166,7 +166,7 @@ sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 
 sudo apt update
 sudo apt install tor deb.torproject.org-keyring
-
+cat /var/lib/tor/hidden_service/hostname
 
 # tor config
 sudo vim /etc/tor/torrc

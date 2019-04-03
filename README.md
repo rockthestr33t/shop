@@ -78,7 +78,7 @@ cd bitcoin-0.15.2
 sudo cp bin/* /usr/local/bin/
 sudo bitcoind -daemon -testnet -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
 bitcoind -daemon -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
-
+bitcoind -deamon -reindex -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
 
 
 # config apache

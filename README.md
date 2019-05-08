@@ -126,27 +126,42 @@ sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/stor
 
 # install nginx
 sudo service apache2 stop
+
 sudo apt-get install nginx
 
 
 # add group / user
 sudo groupadd annularis
+
 sudo useradd -g annularis annularis
 
 
 # php7.0-fpm conf
 sudo cp /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/annularis.conf
+
 sudo vim /etc/php/7.0/fpm/pool.d/annularis.conf
+
 echo " ## edit as following "
+
 echo " # [annularis] "
+
 echo " # user = annularis "
+
 echo " # group = annularis "
+
 echo " # listen = /var/run/php/php7.0-fpm-annularis.sock "
+
 echo " # listen.owner = www-data "
+
 echo " # listen.group = www-data "
+
 echo " # php_admin_ value[disable_functions] = exec,passthru,shell_exec,system "
+
 echo " # php_admin_flag[allow_url_fopen] = off "
+
 sudo vim /etc/php/7.0/fpm/conf.d/10-opcache.ini
+
+
 ## edit as following
 # opcache.enable=0
 
@@ -159,19 +174,27 @@ sudo service php7.0-fpm restart
 https://www.torproject.org/docs/debian.html.en
 
 sudo apt install apt-transport-https
+
 sudo vim /etc/apt/sources
+
 deb https://deb.torproject.org/torproject.org xenial main
+
 deb-src https://deb.torproject.org/torproject.org xenial main
 
 sudo curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+
 sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add -
 
 sudo apt update
+
 sudo apt install tor deb.torproject.org-keyring
+
 cat /var/lib/tor/hidden_service/hostname
+
 
 # tor config
 sudo vim /etc/tor/torrc
+
 sudo service tor restart
 
 
@@ -179,8 +202,24 @@ sudo service tor restart
 sudo chmod 755 /var/www/shop -R && sudo chmod 777 /var/www/shop/application/storage/ 
 
 
+# nginx.conf
+nano /etc/nginx/sites-enabled/default
+
+server {
+    listen        127.0.0.1:80:
+    server_name   _;
+    root         /var/www/shop/;
+    index        index.php index.html;
+    
+    location /install; {
+        try_files
+    }
+}
+
+
 # thigs in my mind
 install sql BitwaspS1W
+
 https://github.com/S1W/BitWasp/blob/master/install/assets/install.sql
 
 USE annularis;
